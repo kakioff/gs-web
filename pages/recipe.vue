@@ -1,11 +1,9 @@
 <template>
-    <div class="flex flex-row w-full h-full ">
+    <div class="flex flex-row w-full h-full">
         <div class="w-[200px] flex-none hidden md:block">
-            <RouteMenu :menu="menu" />
+            <RouteMenu :menu="recipeMenu" />
         </div>
-        <div>
-            <NuxtPage />
-        </div>
+        <NuxtPage />
         <!-- <Teleport to="#header-xs-menu">
             <div>
                 <hr>
@@ -16,14 +14,6 @@
     </div>
 </template>
 <script setup lang="ts">
-import type { MenuOption } from 'naive-ui';
-
-const menu: MenuOption[] = [{
-    label: '总览',
-    key: '/recipe'
-}, {
-    label: '每日菜单',
-    key: '/recipe/daily'
-}]
+import { recipeMenu } from "~/config/menu";
 </script>
 <style lang="scss" scoped></style>

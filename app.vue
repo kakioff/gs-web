@@ -1,13 +1,7 @@
-<script setup lang="ts">
-import { NModalProvider } from 'naive-ui';
-</script>
+<script setup lang="ts"></script>
 
 <template>
-  <NModalProvider>
-    <NMessageProvider>
-      <NuxtLayout>
+    <NuxtLayout>
         <NuxtPage />
-      </NuxtLayout>
-    </NMessageProvider>
-  </NModalProvider>
+    </NuxtLayout>
 </template>

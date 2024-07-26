@@ -1,16 +1,32 @@
 export interface Recipe {
-    id: number,
-    name: string,
-    img?: string,
-    persist: string[],
-    desc: string,
-    steps: string,
-    source: string,
-    createTime: string,
-    updateTime?: string,
-    grade: number,
-    user: {
-        id: number,
-        name: string
-    }
+    created: string;
+    desc?: string;
+    group?: string;
+    id: number;
+    name: string;
+    status: string;
+    uid: number;
+    updated?: string;
+    username?: string;
+}
+export interface Comments {}
+export interface Ingredients {
+    desc: string;
+    id: number;
+    name: string;
+    quantity: number;
+    unit: string;
+
+    done?: boolean
+}
+export interface Steps {
+    desc?: string;
+    id?: number;
+    order?: number;
+    title?: string;
+}
+export interface RecipeDetail extends Recipe {
+    ingredients: Ingredients[];
+    steps: Steps[];
+    comments: Comments[];
 }

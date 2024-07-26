@@ -52,6 +52,12 @@ class APIS {
             ...config
         })
     }
+    public async put<T>(path: string, config?: RequestConfig): Promise<ApiData<T>> {
+        return await this.request<T>(path, {
+            method: 'PUT',
+            ...config
+        })
+    }
     public async post<T>(path: string, config?: RequestConfig): Promise<ApiData<T>> {
         return await this.request<T>(path, {
             method: 'POST',

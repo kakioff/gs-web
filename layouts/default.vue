@@ -1,14 +1,20 @@
 <template>
-    <div class="default-layout">
+    <UContainer class="default-layout">
         <Header class="flex-none" />
-        <main :class="[!route.meta.autoHeight && 'h-full', !route.meta.fullSize&&'p-5']">
+        <main
+            :class="[
+                !route.meta.autoHeight && 'h-full',
+                !route.meta.fullSize && 'p-5',
+            ]"
+        >
             <NuxtPage :class="[!route.meta.autoHeight && 'h-full']" />
         </main>
-    </div>
+
+        <UNotifications />
+    </UContainer>
 </template>
 <script setup lang="ts">
-
-const route = useRoute()
+const route = useRoute();
 </script>
 <style lang="scss">
 html,

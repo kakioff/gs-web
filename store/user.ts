@@ -1,53 +1,80 @@
-import { defineStore } from 'pinia'
-import { defaultUserInfo, type UserInfo, type SignIn } from '~/@types/user'
+import { defineStore } from "pinia";
+import type { ApiData } from "~/@types/api";
+import {
+    defaultUserInfo,
+    type UserInfo,
+    type SignIn,
+    type UpdateInfo,
+} from "~/@types/user";
 
-export const useUserStore = defineStore('user', {
+export const useUserStore = defineStore("user", {
     state(): UserInfo {
         return {
-            ...defaultUserInfo
-        }
+            ...defaultUserInfo,
+        };
     },
     actions: {
         async signout() {
-            const { $api } = useNuxtApp()
-            this.$reset()
+            const { $api } = useNuxtApp();
+            this.$reset();
             let data = await $api.request("/user/signout", {
-                method: "get"
-            })
-            return data
+                method: "get",
+            });
+            return data;
         },
         async getInfo() {
             const { $api } = useNuxtApp(),
-                userToken = this.token
+                userToken = this.token;
             let data = await $api.request<UserInfo>("/user/info", {
-                method: "get"
-            })
-            data.data && (this.$state = data.data)
-            this.token = userToken
-            return this.$state
+                method: "get",
+            });
+            data.data && (this.$state = data.data);
+            this.token = userToken;
+            return this.$state;
         },
-        async login(username: string, password: string) {
-            const { $api } = useNuxtApp()
+        async login(name: string, passwd: string) {
+            const { $api } = useNuxtApp();
             let res = await $api.post<{
-                access_token: string,
-                token_type: string
+                token: string;
+                token_type: string;
             }>("/user/login", {
                 data: {
-                    username, password
-                }
-            })
-            this.token = res.data?.access_token
-            return this.getInfo()
+                    name,
+                    passwd,
+                },
+            });
+            this.token = res.data?.token;
+            return this.getInfo();
         },
         async signin(opt: SignIn) {
-            const { $api } = useNuxtApp()
-            let res = await $api.post("/user/signin", {
+            const { $api } = useNuxtApp();
+            let res = await $api.put("/user/create", {
                 data: {
-                    ...opt
-                }
-            })
-            return res
-        }
+                    ...opt,
+                },
+            });
+            return res;
+        },
+        async updateInfo(opts: UpdateInfo) {
+            const { $api } = useNuxtApp();
+            let res = await $api.post<UserInfo>("/user/update", {
+                data: {
+                    ...opts,
+                },
+            });
+            return res;
+        },
+
+        async checkPassword(passwd: string) {
+            const { $api } = useNuxtApp();
+            let res = await $api.post<string>("/user/check-password", {
+                data: {
+                    passwd,
+                },
+                skipAuth: true
+            });
+            return res;
+        },
     },
     persist: true,
-})
+});

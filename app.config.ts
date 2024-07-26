@@ -4,6 +4,6 @@ export default defineAppConfig({
         app_name: "goodstuff",
     },
     devConfig: {
-        api_base: "http://localhost:8080/api",
+        api_base: "http://localhost:8000/api",
     }
 })

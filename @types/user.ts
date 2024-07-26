@@ -1,21 +1,30 @@
 export interface SignIn {
-    username: string;
-    password: string;
-    email?: string;
-    phone?: string;
-    pushdeer?: string;
+  name: string;
+  passwd: string;
+  email?: string;
+  phone?: string;
 }
 export interface UserInfo {
-    id?: string;
-    username?: string;
-    email?: string;
-    phone?: string;
-    token?: string;
+  id?: string;
+  name?: string;
+  email?: string;
+  phone?: string;
+  role: string;
+  token?: string;
+  has_password: boolean;
 }
 export const defaultUserInfo: UserInfo = {
-    id: "",
-    username: "",
-    email: "",
-    phone: "",
-    token: "",
+  id: "",
+  name: "",
+  email: "",
+  role: "",
+  phone: "",
+  token: "",
+  has_password: false,
+};
+export interface UpdateInfo {
+  email?: string;
+  passwd?: string;
+  pushdeer?: string;
+  username?: string;
 }
